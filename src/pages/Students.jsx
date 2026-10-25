@@ -1,9 +1,9 @@
 
 import StudentCard from '../components/StudentCard'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 
-function Students() {
+
+function Students({ onNavigate }) {
     const [currentPage, setCurrentPage] = useState(1)
 
     const studentsPerPage = 4
@@ -16,9 +16,12 @@ function Students() {
 
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h2 className="mb-0">Student Portal</h2>
-                <Link to="/add-student" className="btn btn-primary">
+                <button
+                    className="btn btn-primary"
+                    onClick={() => onNavigate('Add Student')}
+                >
                     + Add New Student
-                </Link>
+                </button>
             </div>
 
 
