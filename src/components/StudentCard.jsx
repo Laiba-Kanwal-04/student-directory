@@ -1,69 +1,74 @@
-import { useState } from "react";
+
+import { useState } from 'react'
 
 function StudentCard(props) {
-  const [viewCount, setViewCount] = useState(0);
-  const [showDetails, setShowDetails] = useState(false);
+  const [count, setCount] = useState(0)
+  const [showDetails, setShowDetails] = useState(false)
+  const [isDeleted, setIsDeleted] = useState(false)
+
+  if (isDeleted) {
+    return null
+  }
+
   return (
-    <div className="card h-100 shadow-sm">
-
-      {/* Student image placeholder */}
-      <div className="bg-light text-center">
-        <img
-          src="/student-placeholder.png"
-          alt="Student placeholder"
-          className="img-fluid"
-          style={{
-            width: "100%",
-            height: "160px",
-            objectFit: "contain",
-          }}
-        />
-      </div>
-
-
-      <div className="card-body">
-
-        <h5 className="card-title">{props.name}</h5>
-
-        <p className="card-text">
-          <strong>Roll Number:</strong> {props.rollNo}
-        </p>
-
-        <p className="card-text">
-          <strong>Department:</strong> {props.department}
-        </p>
-
-        {showDetails && (
-          <p className="card-text">
-            <strong>Email:</strong> {props.email}
-          </p>
-        )}
-
-        <div className="d-flex gap-2 flex-wrap">
-          <button
-            className="btn btn-primary flex-grow-1"
-            onClick={() => setViewCount(viewCount + 1)}
-          >
-            View Profile ({viewCount})
-          </button>
-
-          <button
-            className="btn btn-info"
-            onClick={() => setShowDetails(!showDetails)}
-          >
-            {showDetails ? "Hide" : "Show"}
-          </button>
-
-          <button
-            className="btn btn-danger"
-            onClick={() => props.onDelete(props.id)}
-          >
-            Delete
-          </button>
+    <div className="card h-100 shadow">
+      <div className="bg-secondary-subtle text-secondary d-flex justify-content-center align-items-center"
+        style={{ height: '150px' }}>
+        <div className="text-center">
+          <img
+            src="/student-placeholder.png"
+            alt="Student"
+            style={{
+              width: '120px',
+              height: '120px',
+              objectFit: 'cover',
+              borderRadius: '50%'
+            }}
+          />
         </div>
       </div>
+
+      <div className="card-body">
+        <h5 className="card-title">{props.name}</h5>
+
+        <p className="card-text mb-1">ID: {props.id}</p>
+        <p className="card-text mb-1">Year: {props.year}</p>
+        <p className="card-text mb-3">Semester: {props.semester}</p>
+
+        <button
+          className="btn btn-outline-primary btn-sm me-2 mb-2"
+          onClick={() => setCount(count + 1)}
+        >
+          View Profile ({count})
+        </button>
+
+        <button
+          className="btn btn-outline-danger btn-sm mb-2"
+          onClick={() => setIsDeleted(true)}
+        >
+          Delete
+        </button>
+
+        <button
+          className="btn btn-outline-secondary btn-sm me-2"
+          onClick={() => setShowDetails(!showDetails)}
+        >
+          {showDetails ? 'Hide Details' : 'Show Details'}
+        </button>
+
+        {showDetails && (
+          <div className="mt-3">
+            <p className="card-text">
+              <strong>Program:</strong> {props.program}
+            </p>
+            <p className="card-text">
+              <strong>GPA:</strong> {props.gpa}
+            </p>
+          </div>
+        )}
+      </div>
     </div>
-  );
+  )
 }
 
-export default StudentCard;
+export default StudentCard

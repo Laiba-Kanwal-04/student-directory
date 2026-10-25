@@ -1,86 +1,46 @@
 
-function Navbar({ activePage, onNavigate }) {
-  const menuItems = [
-    "Dashboard",
-    "Students",
-    "Courses",
-    "Reports",
-  ];
+import { Link } from 'react-router-dom'
 
-  return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div className="container">
-        <a
-          className="navbar-brand"
-          href="#"
-          onClick={(event) => {
-            event.preventDefault();
-            onNavigate("Dashboard");
-          }}
-        >
-          Student Portal
-        </a>
+function Navbar() {
+    return (
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <div className="container">
+                <Link className="navbar-brand" to="/">
+                    StudentPortal
+                </Link>
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarMenu"
-          aria-controls="navbarMenu"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+                <div className="navbar-nav">
+                    <Link className="nav-link" to="/dashboard">
+                        Dashboard
+                    </Link>
 
-        <div className="collapse navbar-collapse" id="navbarMenu">
-          <ul className="navbar-nav ms-auto">
-            {menuItems.map((item) => (
-              <li className="nav-item" key={item}>
-                <button
-                  className={`nav-link btn btn-link ${
-                    activePage === item ? "active" : ""
-                  }`}
-                  onClick={() => onNavigate(item)}
-                >
-                  {item}
-                </button>
-              </li>
-            ))}
+                    <Link className="nav-link" to="/students">
+                        Students
+                    </Link>
 
-            <li className="nav-item dropdown">
-              <button
-                className="nav-link dropdown-toggle btn btn-link"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Settings
-              </button>
+                    <Link className="nav-link" to="/courses">
+                        Courses
+                    </Link>
 
-              <ul className="dropdown-menu dropdown-menu-end">
-                <li>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => onNavigate("Profile Settings")}
-                  >
-                    Profile Settings
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => onNavigate("Preferences")}
-                  >
-                    Preferences
-                  </button>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  );
+                    <Link className="nav-link" to="/reports">
+                        Reports
+                    </Link>
+
+                </div>
+                <form className="d-flex" role="search">
+                    <input
+                        className="form-control me-2"
+                        type="search"
+                        placeholder="Search"
+                        aria-label="Search"
+                    />
+                    <button className="btn btn-outline-light" type="submit">
+                        Search
+                    </button>
+                </form>
+            </div>
+        </nav>
+    )
 }
 
-export default Navbar;
+export default Navbar
